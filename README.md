@@ -1,82 +1,129 @@
+````md path=README.md mode=EDIT
 # CorsRepo
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+✨ A demonstration of CORS (Cross-Origin Resource Sharing) implementation using an Nx monorepo with React frontend and Express backend ✨
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/react-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+This workspace showcases how to properly configure CORS between a React application (`cors-ui`) and an Express API (`cors-service`), including handling preflight requests, custom headers, and credentials.
 
-## Finish your CI setup
+## Applications
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/Kow5TRlKMP)
+### cors-ui (React Frontend)
+A React application that demonstrates CORS requests including:
+- Simple GET requests
+- Complex requests with custom headers (Authorization)
+- Credentials handling
+- Preflight request scenarios
 
+### cors-service (Express Backend)
+An Express API server with CORS middleware configured to:
+- Allow specific origins
+- Handle custom headers
+- Support credentials
+- Respond to preflight OPTIONS requests
 
-## Run tasks
+## Run the Applications
 
-To run the dev server for your app, use:
+Start the backend API server:
+```sh
+npx nx serve cors-service
+```
 
+Start the frontend development server:
 ```sh
 npx nx serve cors-ui
 ```
 
-To create a production bundle:
+The frontend will run on `http://localhost:4200` and make CORS requests to the backend at `http://localhost:3333`.
+
+## Build Applications
+
+To create production bundles:
 
 ```sh
+# Build the React frontend
 npx nx build cors-ui
+
+# Build the Express backend
+npx nx build cors-service
 ```
 
-To see all available targets to run for a project, run:
+## Run Tests
 
 ```sh
+# Run frontend tests
+npx nx test cors-ui
+
+# Run end-to-end tests
+npx nx e2e cors-ui-e2e
+```
+
+## CORS Features Demonstrated
+
+This project demonstrates key CORS concepts:
+- **Simple vs Complex requests**: See how different request types trigger different CORS behavior
+- **Preflight requests**: Custom headers trigger OPTIONS preflight requests
+- **Credentials handling**: Including cookies and authorization headers
+- **Origin validation**: Backend configured to accept requests from specific origins
+- **Header allowlisting**: Custom headers like `Authorization` properly configured
+
+Open the browser DevTools Network tab to observe CORS headers and preflight requests in action.
+
+## Project Structure
+
+```
+apps/
+├── cors-ui/           # React frontend application
+├── cors-ui-e2e/       # End-to-end tests
+└── cors-service/      # Express backend API
+```
+
+## Add New Projects
+
+To generate a new React application:
+```sh
+npx nx g @nx/react:app my-app
+```
+
+To generate a new Express application:
+```sh
+npx nx g @nx/express:app my-api
+```
+
+To generate a new library:
+```sh
+npx nx g @nx/react:lib my-lib
+```
+
+## Useful Commands
+
+```sh
+# See all available targets for a project
 npx nx show project cors-ui
+
+# View the project dependency graph
+npx nx graph
+
+# Run multiple targets across projects
+npx nx run-many -t build test lint
+
+# List all projects
+npx nx show projects
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+## Learn More
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [Learn about CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+- [Nx Documentation](https://nx.dev)
+- [React Documentation](https://react.dev)
+- [Express CORS Middleware](https://github.com/expressjs/cors)
 
-## Add new projects
+## Nx Features Used
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/react:app demo
-```
-
-To generate a new library, use:
-
-```sh
-npx nx g @nx/react:lib mylib
-```
-
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
-
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/react-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- **Monorepo management** with multiple applications
+- **Plugin system** for automatic target inference
+- **Code generation** for consistent project structure
+- **Dependency graph** visualization
+- **Task orchestration** and caching
+````

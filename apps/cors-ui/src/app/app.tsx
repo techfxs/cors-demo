@@ -1,6 +1,6 @@
 import NxWelcome from './nx-welcome';
-
 import { Route, Routes, Link } from 'react-router-dom';
+import {List} from '../components/List';
 
 export function App() {
   return (
@@ -13,6 +13,7 @@ export function App() {
       <br />
       <hr />
       <br />
+      <List />
       <div role="navigation">
         <ul>
           <li>
